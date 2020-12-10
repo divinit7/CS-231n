@@ -22,7 +22,10 @@ def svm_loss_naive(W, X, y, reg):
     - gradient with respect to weights W; an array of same shape as W
     """
     dW = np.zeros(W.shape) # initialize the gradient as zero
-
+    # Maximal margin classifier is when we use a threshold that uses the largest margin,which can make them sensitive to outliers
+    # soft margin is classifier  has some misclassifications but generalizes well, determined using cross validation aka support vector classifier
+    # , which is a n dimensional flat affine subspace. Thus we use support vector machines where you scale data from lower to higher dimension without  
+    # acutally transaforming the original data using kernel functions, aka the kernel trick
     # compute the loss and the gradient
     num_classes = W.shape[1]
     num_train = X.shape[0]
@@ -35,7 +38,10 @@ def svm_loss_naive(W, X, y, reg):
                 continue
             margin = scores[j] - correct_class_score + 1 # note delta = 1
             if margin > 0:
-                loss += margin
+                loss += margin 
+                dW[:, y[i]] += X[i, :]
+                dW[:, j] += X[i, :]
+
 
     # Right now the loss is a sum over all training examples, but we want it
     # to be an average instead so we divide by num_train.
