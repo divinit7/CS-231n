@@ -122,3 +122,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+CS231n - in julia/knn/testResized/
+
+CS231n - in julia/knn/trainResized/
